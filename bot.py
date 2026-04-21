@@ -3,7 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from datetime import datetime, timedelta
 
-TOKEN = "YANGI_TOKEN"
+TOKEN = "8577675145:AAFPiVWV2mi8wLlh7DRHTX1yHiA0ze0xgWE"
 
 scheduler = AsyncIOScheduler()
 
