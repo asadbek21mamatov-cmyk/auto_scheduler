@@ -3,26 +3,13 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from datetime import datetime, timedelta
 
-TOKEN = "8577675145:AAFPiVWV2mi8wLlh7DRHTX1yHiA0ze0xgWE"
+TOKEN = "YANGI_TOKEN"
 
 scheduler = AsyncIOScheduler()
 
 user_state = {}
 user_tasks = {}
 
-async def list_tasks(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    chat_id = update.message.chat_id
-    tasks = user_tasks.get(chat_id, [])
-
-    if not tasks:
-        await update.message.reply_text("📭 Hozircha ishlar yo‘q")
-        return
-
-    msg = "📋 Sening ishlaring:\n\n"
-    for i, (time_part, task, _, _) in enumerate(tasks):
-        msg += f"{i+1}. ⏰ {time_part} - {task}\n"
-
-    await update.message.reply_text(msg)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Salom! 👋")
@@ -85,6 +72,6 @@ app = ApplicationBuilder().token(TOKEN).post_init(post_init).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("works", works))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-app.add_handler(CommandHandler("list", list_tasks))
+
 print("Bot ishga tushdi...")
 app.run_polling()
