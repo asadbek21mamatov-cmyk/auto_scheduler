@@ -104,7 +104,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if run_time <= now:
                 run_time += timedelta(days=1)
 
-            reminder_time = run_time - timedelta(minutes=30)
+            reminder_time = run_time - timedelta(minutes=5)
 
             # Job ID lar
             job_id_main = f"{chat_id}_{now.timestamp()}_main"
@@ -119,13 +119,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 id=job_id_main
             )
 
-            # Agar 30 daqiqa oldingi vaqt ham kelajakda bo'lsa, uni qo'shamiz
+            # Agar 5 daqiqa oldingi vaqt ham kelajakda bo'lsa, uni qo'shamiz
             if reminder_time > now:
                 scheduler.add_job(
                     send_reminder,
                     'date',
                     run_date=reminder_time,
-                    args=[context.bot, chat_id, f"⚠️ 30 daqiqadan keyin: {task}"],
+                    args=[context.bot, chat_id, f"⚠️ 5 daqiqadan keyin: {task}"],
                     id=job_id_early
                 )
             else:
